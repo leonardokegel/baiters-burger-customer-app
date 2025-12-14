@@ -6,6 +6,8 @@ import br.com.fiap.baitersburger.customer.infrastructure.mapper.CustomerEntityMa
 import br.com.fiap.baitersburger.customer.infrastructure.persistence.repository.CustomerJpaRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class CustomerRepositoryAdapter implements CustomerRepositoryPort {
 
@@ -21,5 +23,10 @@ public class CustomerRepositoryAdapter implements CustomerRepositoryPort {
     public void insert(Customer customer) {
         var customerEntity = customerEntityMapper.toCustomerEntity(customer);
         customerJpaRepository.save(customerEntity);
+    }
+
+    @Override
+    public Optional<Customer> findByCpf(String cpf) {
+        return customerJpaRepository.findByCpf(cpf).map(customerEntityMapper::toCustomer);
     }
 }

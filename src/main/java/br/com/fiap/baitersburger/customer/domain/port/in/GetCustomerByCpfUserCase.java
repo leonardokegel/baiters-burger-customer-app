@@ -1,13 +1,9 @@
-package br.com.fiap.baitersburger.customer.domain.port.out;
+package br.com.fiap.baitersburger.customer.domain.port.in;
 
 import br.com.fiap.baitersburger.customer.domain.model.Customer;
 
 import java.util.Optional;
 
-public interface CustomerRepositoryPort {
-
-    void insert(Customer customer);
-
+public interface GetCustomerByCpfUserCase {
     Optional<Customer> findByCpf(String cpf);
-
 }
