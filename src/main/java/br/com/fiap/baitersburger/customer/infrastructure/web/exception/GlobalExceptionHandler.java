@@ -2,6 +2,7 @@ package br.com.fiap.baitersburger.customer.infrastructure.web.exception;
 
 import br.com.fiap.baitersburger.customer.domain.exception.CustomerAlreadyExistsException;
 import br.com.fiap.baitersburger.customer.domain.exception.CustomerNotFoundException;
+import br.com.fiap.baitersburger.customer.domain.exception.InvalidCpfException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,6 +26,14 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(CustomerAlreadyExistsException.class)
     public ResponseEntity<Map<String, Object>> handleNotFound(CustomerAlreadyExistsException ex) {
+
+        Map<String, Object> body = fillBody(ex.getMessage(), HttpStatus.BAD_REQUEST.value());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
+    @ExceptionHandler(InvalidCpfException.class)
+    public ResponseEntity<Map<String, Object>> handleNotFound(InvalidCpfException ex) {
 
         Map<String, Object> body = fillBody(ex.getMessage(), HttpStatus.BAD_REQUEST.value());
 
