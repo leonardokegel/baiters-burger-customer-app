@@ -23,7 +23,7 @@ jobs:
           cache: 'maven'
 
       - name: Run Unit Tests
-        run: mvn -B clean test
+        run: mvn -B clean test -Dspring.profiles.active=ci
 
   build:
     name: Build Artifact
@@ -42,7 +42,7 @@ jobs:
           cache: 'maven'
 
       - name: Build application package
-        run: mvn -B package -DskipTests
+        run: mvn -B package -DskipTests -Dspring.profiles.active=ci
 
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
