@@ -1,6 +1,8 @@
 package br.com.fiap.baitersburger.customer.infrastructure.web.controller;
 
 import br.com.fiap.baitersburger.customer.application.service.CustomerService;
+import br.com.fiap.baitersburger.customer.domain.exception.CustomerNotFoundException;
+import br.com.fiap.baitersburger.customer.domain.exception.ExceptionMessages;
 import br.com.fiap.baitersburger.customer.domain.model.Customer;
 import br.com.fiap.baitersburger.customer.domain.port.in.GetCustomerByCpfUserCase;
 import br.com.fiap.baitersburger.customer.domain.port.in.InsertCustomerUseCase;
@@ -36,9 +38,8 @@ public class CustomerController {
 
     @GetMapping("/{cpf}")
     public ResponseEntity<CustomerResponseDTO> get(@PathVariable String cpf) {
-        var customerResponseDTO = getCustomerByCpfUserCase.findByCpf(cpf)
-                .map(customerMapper::toCustomerResponseDTO)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
+        var customer = getCustomerByCpfUserCase.findByCpf(cpf);
+        var customerResponseDTO = customerMapper.toCustomerResponseDTO(customer);
         return ResponseEntity.ok().body(customerResponseDTO);
     }
 }
