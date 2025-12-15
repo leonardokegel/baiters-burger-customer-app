@@ -1,20 +1,18 @@
 package br.com.fiap.baitersburger.customer.infrastructure.web.controller;
 
-import br.com.fiap.baitersburger.customer.application.service.CustomerService;
-import br.com.fiap.baitersburger.customer.domain.exception.CustomerNotFoundException;
-import br.com.fiap.baitersburger.customer.domain.exception.ExceptionMessages;
-import br.com.fiap.baitersburger.customer.domain.model.Customer;
 import br.com.fiap.baitersburger.customer.domain.port.in.GetCustomerByCpfUserCase;
 import br.com.fiap.baitersburger.customer.domain.port.in.InsertCustomerUseCase;
 import br.com.fiap.baitersburger.customer.infrastructure.web.dto.CustomerRequestDTO;
 import br.com.fiap.baitersburger.customer.infrastructure.web.dto.CustomerResponseDTO;
 import br.com.fiap.baitersburger.customer.infrastructure.web.mapper.CustomerMapper;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/customers")
+@Profile("!ci")
 public class CustomerController {
 
     private final InsertCustomerUseCase insertCustomerUseCase;
