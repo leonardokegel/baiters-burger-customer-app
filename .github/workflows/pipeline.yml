@@ -67,8 +67,11 @@ jobs:
 
       - name: Prepare Agent, Run Tests, and Generate JaCoCo Report
         run: |
-          mvn clean org.jacoco:jacoco-maven-plugin:0.8.13:prepare-agent test -Dspring.profiles.active=ci
-          mvn org.jacoco:jacoco-maven-plugin:0.8.13:report -Dspring.profiles.active=ci
+            mvn compile -Dspring.profiles.active=ci
+            
+            mvn org.jacoco:jacoco-maven-plugin:0.8.13:prepare-agent test -Dspring.profiles.active=ci
+            
+            mvn org.jacoco:jacoco-maven-plugin:0.8.13:report -Dspring.profiles.active=ci
 
       - name: Debug JaCoCo Report Location and Size
         run: |
