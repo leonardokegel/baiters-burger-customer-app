@@ -71,3 +71,8 @@ jobs:
     needs: [ tests, build ]
     uses: ./.github/workflows/docker.yml
     secrets: inherit
+
+  terraform-apply:
+    needs: [ docker-build ]
+    uses: ./.github/workflows/terraform.yml
+    secrets: inherit
