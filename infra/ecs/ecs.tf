@@ -64,11 +64,11 @@ resource "aws_ecs_service" "this" {
     assign_public_ip = true
   }
 
-  load_balancer {
-    target_group_arn = data.aws_lb_target_group.customer_lb_target_group.arn
-    container_name   = local.container_name
-    container_port   = var.container_port
-  }
+  #load_balancer {
+  #  target_group_arn = data.aws_lb_target_group.customer_lb_target_group.arn
+  #  container_name   = local.container_name
+  # container_port    = var.container_port
+  #}
 
   deployment_minimum_healthy_percent = 50
   deployment_maximum_percent         = 200
