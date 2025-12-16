@@ -9,7 +9,7 @@ on:
       - develop
 
 jobs:
-  build:
+  tests:
     name: Tests and Sonar Analysis
     runs-on: ubuntu-latest
 
@@ -44,3 +44,25 @@ jobs:
             -Dsonar.host.url=https://sonarcloud.io \
             org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
             -Dsonar.projectKey=baitersburger-customer
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Build application package with Maven
+        run: mvn -B package -DskipTests
+
+      - name: Upload JAR artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: baitersburger-jar
+          path: target/*.jar
