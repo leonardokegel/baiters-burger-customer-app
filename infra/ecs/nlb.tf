@@ -12,13 +12,13 @@ resource "aws_lb" "this" {
 resource "aws_lb_target_group" "this" {
   name        = "${var.app_name}-tg"
   port        = var.container_port #
-  protocol    = "HTTP"
+  protocol    = "TCP"
   vpc_id      = data.aws_vpc.default.id #
   target_type = "ip"
 
   health_check {
     enabled             = true
-    protocol            = "HTTP"
+    protocol            = "TCP"
     interval            = 30
     healthy_threshold   = 3
     unhealthy_threshold = 3
@@ -28,7 +28,7 @@ resource "aws_lb_target_group" "this" {
 resource "aws_lb_listener" "this" {
   load_balancer_arn = aws_lb.this.arn
   port              = var.container_port
-  protocol          = "HTTP"
+  protocol          = "TCP"
 
   default_action {
     type             = "forward"
