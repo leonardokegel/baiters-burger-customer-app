@@ -75,14 +75,15 @@ A API segue os padrões REST e está disponível através do prefixo `/api/v1/cu
 
 ---
 
-### 3. Tratamento de Erros (Global)
+## Tratamento de Erros (Global)
 A API utiliza um manipulador de exceções global para retornar respostas padronizadas em caso de erro:
 * **CustomerAlreadyExistsException:** Retorna `400 Bad Request` se tentar registar um CPF já existente.
 * **InvalidCpfException:** Retorna `400 Bad Request` para CPFs em formato inválido ou vazios.
 * **CustomerNotFoundException:** Retorna `404 Not Found` quando a busca não obtém resultados.
 
+---
 
-### 4. 🧪 Testes e Qualidade
+## 🧪 Testes e Qualidade
 
 O projeto adota uma estratégia rigorosa de testes e análise estática para garantir a estabilidade do domínio e a confiabilidade das regras de negócio.
 
@@ -114,8 +115,9 @@ Para executar a verificação completa (testes + check de cobertura do Jacoco):
 ```bash
 ./mvnw verify -Dspring.profiles.active=ci
 ```
+---
 
-### 5. ☁️ Infraestrutura e Deploy (CI/CD)
+## ☁️ Infraestrutura e Deploy (CI/CD)
 
 A aplicação utiliza uma esteira de automação completa para garantir que o código seja testado, empacotado e implantado de forma consistente na nuvem AWS.
 
